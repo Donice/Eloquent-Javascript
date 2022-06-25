@@ -14,7 +14,4 @@ function countBs(string) {
 }
 
 countBs('BURY BARBADOS')
-// -> 2
-
-
-
+// -> 3
