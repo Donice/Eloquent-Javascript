@@ -1,4 +1,4 @@
-#Eloquent Javascript Solutions
+#Eloquent Javascript Solution
 
 In this repository, I take a journey on the phenenomenal book,
 **Eloquent Javascript**, proffering simple solutions, to the problems
