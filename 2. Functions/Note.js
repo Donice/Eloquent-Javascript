@@ -4,7 +4,7 @@ const hummus = function (factor) {
     if (ingredientAmount > 1) {
       unit += "s";
     }
-    // console.log(`${ingredientAmount} ${unit} ${name}`)
+    console.log(`${ingredientAmount} ${unit} ${name}`, "console1");
   };
   ingredient(1, "can", "chickpeas");
   ingredient(0.25, "can", "tahini");
@@ -39,6 +39,8 @@ function divide(dividend) {
 let product = divide(20);
 // console.log(product(1200))
 
+//RECURSSION...................................................
+
 function power(base, exponent) {
   if (exponent == 0) {
     return 1;
@@ -46,11 +48,10 @@ function power(base, exponent) {
     return base * power(base, exponent - 1);
   }
 }
-// first iteration
-// say (10, 3)
-// since exponent is not equals to 0, we use else
 
-// console.log(power(2, 3))
+console.log(power(2, 3), "Recurssion");
+
+//.........................................
 
 function findSolution(target) {
   function find(current, history) {
