@@ -68,25 +68,32 @@ addEntry(["weekend", "cycling", "break", "peanuts", "bear"], true);
 
 // .........................................
 
-const table = [76, 9, 4, 1];
+// function phi(table) {
+//   return (
+//     (table[3] * table[0] - table[2] * table[1]) /
+//     Math.sqrt(
+//       (table[2] + table[3]) *
+//       (table[0] + table[1]) *
+//       (table[1] + table[3]) *
+//       (table[0] + table[2])
+//     )
+//   );
+// }
 
-function phi(table) {
+function phi([n00, n01, n10, n11]) {
   return (
-    (table[3] * table[0] - table[2] * table[1]) /
+    (n11 * n00 - n10 * n01) /
     Math.sqrt(
-      (table[2] + table[3]) *
-        (table[0] + table[1]) *
-        (table[1] + table[3]) *
-        (table[0] + table[2])
+      (n10 + n11) *
+      (n00 + n01) *
+      (n01 + n11) *
+      (n00 + n10)
     )
   );
 }
-
-// console.log(phi(table))
-
 //................................................
 
-const JOURNAL = require('./JOURNAL')
+const JOURNAL = require("./JOURNAL");
 
 function tableFor(event, journal) {
   let table = [0, 0, 0, 0];
@@ -99,5 +106,106 @@ function tableFor(event, journal) {
   }
   return table;
 }
+//..........................................
 
-console.log(tableFor("carrot", JOURNAL));
+function journalEvents(journal) {
+  let events = [];
+  for (let entry of journal) {
+    for (let event of entry.events) {
+      if (!events.includes(event)) {
+        events.push(event);
+      }
+    }
+  }
+  return events;
+}
+
+for (let event of journalEvents(JOURNAL)) {
+  // console.log(event + ":", phi(tableFor(event, JOURNAL)));
+}
+
+//.........................................
+
+for (let event of journalEvents(JOURNAL)) {
+  let correlation = phi(tableFor(event, JOURNAL));
+  if (correlation > 0.1 || correlation < -0.1) {
+    // console.log(event + ":", correlation);
+  }
+}
+
+//.........................................
+
+for (let entry of JOURNAL) {
+  if (
+    entry.events.includes("peanuts") &&
+    !entry.events.includes("brushed teeth")
+  ) {
+    entry.events.push("peanut teeth");
+  }
+}
+// console.log(phi(tableFor('peanut teeth', JOURNAL)));
+
+//...........................................
+
+let todoList = [];
+function remember(task) {
+  todoList.push(task);
+}
+remember("Bath");
+// console.log(todoList)
+
+function getTask() {
+  return todoList.shift();
+}
+getTask();
+// console.log(todoList)
+
+function rememberUrgently(task) {
+  todoList.unshift(task);
+}
+rememberUrgently("Brush");
+// console.log(todoList)
+
+//..........................................
+
+const Arr = [1, 3, 2, 4, 2, 8, 9, 2, 0, 8, 3];
+// console.log(Arr.indexOf(2, 3))
+// console.log(Arr.lastIndexOf(3))
+
+//.........................................
+
+function remove(array, index) {
+  return array.slice(0, index).concat(array.slice(index + 1));
+}
+
+// console.log(remove(Arr, 3))
+
+//.........................................
+
+function max(...numbers) {
+  let result = -Infinity;
+  for (let number of numbers) {
+    if (number > result) result = number;
+  }
+  return result;
+}
+
+// console.log(max(4, 1, 9, -2))
+
+let numbers = [5, 1, 7];
+// console.log(max(...numbers))
+
+//.........................................
+
+function randomPointOncircle(radius) {
+  let angle = Math.random() * 2 * Math.PI;
+  return { x: radius * Math.cos(angle), y: radius * Math.sin(angle) };
+}
+console.log(randomPointOncircle(2))
+
+//........................................
+
+let {name} = {name: "Faraji", age: 23}
+// console.log(name)
+
+// JSON ..................................
