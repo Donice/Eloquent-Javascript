@@ -111,9 +111,10 @@ function characterCount(script) {
   }, 0);
 }
 console.log(
-  Scripts.reduce((a, b) => {
-    return characterCount(a) < characterCount(b) ? b : a;
-  })
+  // Scripts.reduce((a, b) =]\> {
+  //   return characterCount(a) < characterCount(b) ? b : a;
+  // }),
+  'line 117'
 );
 
 let biggest = null;
@@ -122,24 +123,26 @@ for (let script of Scripts) {
     biggest = script;
   }
 }
-console.log(biggest);
+// console.log(biggest);
 
 function average(array) {
   return array.reduce((a, b) => a + b) / array.length;
 }
 console.log(Math.round(average(
-  Scripts.filter(s => s.living).map(s => s.year))));
-
+  Scripts.filter(s => s.living).map(s => s.year))),
+  'line 132');
+  
 console.log(Math.round(average(
-  Scripts.filter(s => !s.living).map(s => s.year))));
+  Scripts.filter(s => !s.living).map(s => s.year))),
+  'line 136');
 
-let totalYears = 0, countYears = 0;
-for (let script of Scripts) {
-  if (script.living) {
-    totalYears += script.year;
-    countYears += 1;
+
+let total = 0, count = 0;
+for(let script of Scripts) {
+  if(script.living) {
+    total += script.year;
+    count += 1;
   }
 }
-
-console.log(Math.round(totalYears / countYears));
-   
+// console.log(total, count, 'line 147')
+console.log(Math.round(total / count), 'line 148');
